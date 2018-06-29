@@ -1,0 +1,36 @@
+## docker-compose syntax version
+version: '3'
+
+services:
+  php-ssh:
+    container_name: php-ssh
+    image: vavyskov/php-ssh
+    ports:
+      - "80:80"
+      - "2222:22"
+    volumes:
+      - workspace:/var/www/workspace
+    depends_on:
+      - mariadb
+  mariadb:
+    container_name: mariadb
+    image: vavyskov/mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
+      MYSQL_DATABASE: mariadb
+  adminer:
+    container_name: adminer
+    image: vavyskov/adminer
+    restart: always
+    ports:
+      - 7777:8080
+
+## Persist data sinc you are not typing "docker-compose down -v"
+volumes:
+  workspace:
+  mariadb:
