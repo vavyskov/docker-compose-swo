@@ -11,15 +11,15 @@ services:
       - "445:445"
     volumes:
       - workspace:/var/www/html
-      #- //c/Users/user/workspace:/var/www/html
       #- ./workspace:/var/www/html
       #- ./workspace:/var/www/html:cached
+      #- //c/Users/user/workspace:/var/www/html
     depends_on:
       - mariadb
+    restart: always
   mariadb:
     container_name: mariadb
     image: vavyskov/mariadb
-    restart: always
     volumes:
       - mariadb:/var/lib/mysql
     environment:
@@ -28,12 +28,13 @@ services:
       MYSQL_USER: mariadb
       MYSQL_PASSWORD: mariadb
       MYSQL_DATABASE: mariadb
+    restart: always
   adminer:
     container_name: adminer
     image: vavyskov/adminer
-    restart: always
     ports:
       - 7777:8080
+    restart: always
 
 ## Persist data until you are not typing "docker-compose down -v"
 volumes:
