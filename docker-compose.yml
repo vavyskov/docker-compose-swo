@@ -7,10 +7,13 @@ services:
     image: vavyskov/php-ssh-smb
     ports:
       - "80:80"
-      - "22:22"
+      - "2222:22"
       - "445:445"
     volumes:
       - workspace:/var/www/html
+      #- //c/Users/user/workspace:/var/www/html
+      #- ./workspace:/var/www/html
+      #- ./workspace:/var/www/html:cached
     depends_on:
       - mariadb
   mariadb:
