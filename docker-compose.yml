@@ -2,14 +2,15 @@
 version: '3'
 
 services:
-  php-ssh:
-    container_name: php-ssh
-    image: vavyskov/php-ssh
+  php:
+    container_name: php
+    image: vavyskov/php-ssh-smb
     ports:
       - "80:80"
-      - "2222:22"
+      - "22:22"
+      - "445:445"
     volumes:
-      - workspace:/var/www/workspace
+      - workspace:/var/www/html
     depends_on:
       - mariadb
   mariadb:
@@ -30,7 +31,7 @@ services:
     ports:
       - 7777:8080
 
-## Persist data sinc you are not typing "docker-compose down -v"
+## Persist data until you are not typing "docker-compose down -v"
 volumes:
   workspace:
   mariadb:
