@@ -19,6 +19,7 @@ services:
   mariadb:
     container_name: mariadb
     image: vavyskov/mariadb
+    restart: always
     volumes:
       - mariadb:/var/lib/mysql
     environment:
